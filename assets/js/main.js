@@ -283,8 +283,8 @@ jQuery(function($){
 	10-Tweet
 	===========================================*/
 	if($('.tweet').length!=0){
-		 $('.tweet').twittie({
-			 username:'radio360gchu',
+		$('.tweet').twittie({
+			username:'radio360gchu',
 			dateFormat: '%b. %d, %Y',
 			template: '{{tweet}} <time class="date">{{date}}</time>',
 			count: 3,
@@ -297,7 +297,7 @@ jQuery(function($){
 				singleItem:true,
 				navigation : false,
 				autoHeight : true,
-			 });
+			});
 		});
 	}
 	
@@ -374,35 +374,35 @@ jQuery(function($){
 		});
 	}
 	
+	if($("#contactform").length!=0){
+		$("#contactform").submit(function (e) {
+			e.preventDefault();
+			var name = $("#name").val(),
+			email = $("#email").val(),
+			subject = $("#subject").val(),
+			message = $("#message").val(),
+			dataString = 'name=' + name + '&email=' + email+ '&subject=' + subject + '&message=' + message;
+			if (name === '' || !IsEmail(email) || message === '') {
+				$('#valid-issue').html('Por favor ingresa datos verdaderos!').slideDown();
+			} else {
+				$.ajax({
+					type: "POST",
+					url: "http://radio360.local/assets/php/submit.php",
+					data: dataString,
+					success: function () {
+						$('#contactform').slideUp();
+						$('#valid-issue').html('Tu mensaje fue enviado!,<BR> Nos contactaremos a la brevedad, Gracias.').show();
+					}
+				});
+			}
+		});
+	}
 	function IsEmail(email) {
 			var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 			return regex.test(email);
 		}
 		
-		if($("#contactform").length!=0){
-			$("#contactform").submit(function (e) {
-				e.preventDefault();
-				var name = $("#name").val(),
-				email = $("#email").val(),
-				subject = $("#subject").val(),
-				message = $("#message").val(),
-				dataString = 'name=' + name + '&email=' + email+ '&subject=' + subject + '&message=' + message;
 		
-				if (name === '' || !IsEmail(email) || message === '') {
-					$('#valid-issue').html('Por favor ingresa datos verdaderos!').slideDown();
-				} else {
-					$.ajax({
-						type: "POST",
-						url: "assets/php/submit.php",
-						data: dataString,
-						success: function () {
-							$('#contactform').slideUp();
-							$('#valid-issue').html('Tu mensaje fue enviado!,<BR> Nos contactaremos a la brevedad, Gracias.').show();
-						}
-					});
-				}
-			});
-		}
 		
 		/*==========================
 		Ajax Expander

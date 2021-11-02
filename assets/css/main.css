@@ -2356,10 +2356,6 @@ a.playlist_expander{
 	position:relative;
 }
 .messageBox button{
-	position:absolute;
-	right:0;
-	top:0;
-	height:100%;
-	width:40px;
-	text-align:center;
+	width: 100px;
+	float: right;
 }
